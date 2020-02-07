@@ -1,0 +1,46 @@
+<div class="creation-card">
+    <div class="creation-card-title">Create Todo Item</div>
+    <form *ngIf="createForm" [formGroup]="createForm" (ngSubmit)="_createTodo()" class="creation-card-content">
+        <input id="description" class="form-control item" formControlName="description" type="text"
+            placeholder="Description" required>
+        <input class="form-control item" formControlName="responsible" type="text" placeholder="Responsible" required>
+        <select class="form-control item" formControlName="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+        <button class="btn btn-primary" type="submit" [disabled]="createForm.invalid">Create</button>
+    </form>
+</div>
+
+<div class="todo-list table-view" *ngIf="(todos | async)?.length != 0">
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>#</th>
+                <th>Todo Description</th>
+                <th>Responsible</th>
+                <th>Priority</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todoItem of todos | async">
+                <td><input type="checkbox" (click)="toggleTodo(todoItem)" [class.completed]="todoItem.isCompleted"></td>
+                <td><span [class.completed]="todoItem.isCompleted">{{ todoItem.description }}</span></td>
+                <td><span [class.completed]="todoItem.isCompleted">{{ todoItem.responsible }}</span></td>
+                <td>
+                    <span *ngIf="todoItem.priority === 'low'" class="badge badge-success">Low</span>
+                    <span *ngIf="todoItem.priority === 'medium'" class="badge badge-warning">Medium</span>
+                    <span *ngIf="todoItem.priority === 'high'" class="badge badge-danger">High</span>
+                </td>
+                <td>
+                    <button class="btn btn-default" (click)="removeTodo(todoItem)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
