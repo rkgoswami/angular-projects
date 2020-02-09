@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "core-js": "^2.5.4",
-    "redux": "~4.0.3",
+    "redux": "4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "rxjs": "~6.5.4",
     "tslib": "^1.9.0",
